@@ -24,16 +24,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'full_name',
-        'user_name',
+        'name',
         'email',
         'email_verified_at',
         'password',
-        'photo',
-        'phone',
-        'address',
-        'role',
-        'status',
     ];
 
     /**
@@ -54,8 +48,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         // 'password' => 'hashed',
-        'role' => RoleType::class,
-        'status' => AccountStatus::class,
     ];
 
     public function inventories(): HasMany
