@@ -17,10 +17,10 @@ class CreateTaskController extends Controller
     public function __invoke(CreateTaskRequest $request, TaskRepositoryInterface $taskRepository)
     {
         $payload = $request->validated();
-        
-         $payload['user_id'] = Auth::id();
-         $taskRepository->create($payload);
-         Cache::flush();
+
+        $payload['user_id'] = Auth::id();
+        $taskRepository->create($payload);
+        Cache::flush();
 
         return response()->json(['status' => 'success'], 200);
     }

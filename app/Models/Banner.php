@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Banner extends Model
 {
     use HasFactory, Sluggable;
+
     protected $fillable = [
         'title',
         'slug',

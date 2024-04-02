@@ -36,6 +36,7 @@ class UpdateTaskController extends Controller
         }
 
         Cache::flush();
+
         return response()->json(['status' => 'success', 'data' => $taskStatus], 200);
     }
 }

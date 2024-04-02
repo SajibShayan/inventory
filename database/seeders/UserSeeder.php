@@ -20,6 +20,6 @@ class UserSeeder extends Seeder
             'password' => Hash::make('p@ssword10'),
             'status' => 'active',
         ]);
-    
+
     }
 }

@@ -14,10 +14,9 @@ class DestroyTaskController extends Controller
      * Handle the incoming request.
      */
     public function __invoke(
-     Task $task,
-     TaskRepositoryInterface $taskRepository
-     )
-    {
+        Task $task,
+        TaskRepositoryInterface $taskRepository
+    ) {
         $taskRepository->delete($task->id);
         Cache::flush();
 

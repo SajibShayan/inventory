@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Task extends Model
 {
     use HasFactory, Sluggable;
+
     protected $fillable = [
         'title',
         'slug',
@@ -18,6 +19,7 @@ class Task extends Model
         'status',
         'user_id',
     ];
+
     protected $casts = [
         'status' => TaskStatus::class,
     ];
@@ -27,26 +29,30 @@ class Task extends Model
     {
         return 'slug';
     }
-     //define title column for making slug unique
+
+    //define title column for making slug unique
     public function getSluggableColumnName(): string
     {
         return 'title';
     }
+
     //scoped methods
     public function whereUser($userId)
     {
         return $this->where('user_id', $userId);
     }
+
     public function whereIncomplete()
     {
         return $this->where('status', TaskStatus::INCOMPLETE);
     }
+
     public function whereComplete()
     {
         return $this->where('status', TaskStatus::COMPLETE);
     }
 
-    //relation 
+    //relation
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

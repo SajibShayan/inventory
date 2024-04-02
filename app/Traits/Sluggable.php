@@ -13,6 +13,12 @@ trait Sluggable
             $columnName = $model->getSluggableColumnName();
             $model->slug = $model->generateSlug($model->{$columnName}, $columnName);
         });
+        static::saving(function (Model $model) {
+            $columnName = $model->getSluggableColumnName();
+            if ($model->isDirty($columnName)) {
+                $model->slug = $model->generateSlug($model->{$columnName}, $columnName);
+            }
+        });
     }
 
     private function generateSlug(string $columnValue, $columnName): string

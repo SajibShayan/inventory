@@ -4,7 +4,6 @@ namespace App\Jobs;
 
 use App\Mail\SendTaskMail;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -19,10 +18,11 @@ class SendTaskEmailJob implements ShouldQueue
      * Create a new job instance.
      */
     protected $user;
+
     public function __construct($user)
     {
         $this->user = $user;
-        
+
     }
 
     /**
@@ -30,6 +30,6 @@ class SendTaskEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        Mail::to($this->user->email)->send(new SendTaskMail()); 
+        Mail::to($this->user->email)->send(new SendTaskMail());
     }
 }

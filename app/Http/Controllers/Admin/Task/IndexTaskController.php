@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Admin\Task;
 
 use App\Contract\Repositories\TaskRepositoryInterface;
-use App\Enums\TaskStatus;
 use App\Http\Controllers\Controller;
-use App\Models\Task;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class IndexTaskController extends Controller

@@ -25,15 +25,15 @@ class CreateTaskRequest extends FormRequest
         $rules = [
             'title' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'status' => ['required', 'in:incomplete,complete']
+            'status' => ['required', 'in:incomplete,complete'],
         ];
-    
+
         if ($this->isMethod('PUT')) {
             $rules['title'][] = Rule::unique('tasks')->ignore($this->route('task')->id);
         } else {
             $rules['title'][] = Rule::unique('tasks');
         }
-    
+
         return $rules;
     }
 }

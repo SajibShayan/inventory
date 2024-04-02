@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Enums\AccountStatus;
-use App\Enums\RoleType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
