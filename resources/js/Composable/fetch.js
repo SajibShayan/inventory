@@ -1,4 +1,5 @@
-export const useParentPathName = (path) => {
-    const segments = path.split("/");
-    return segments[1];
+export const useParentRouteName = (route) => {
+    const segments = route.split(":");
+    segments.pop();
+    return segments.join(":");
 };

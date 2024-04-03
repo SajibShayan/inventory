@@ -26,17 +26,23 @@ import {
   ChatBubbleLeftRightIcon,
   MapIcon,
 } from "@heroicons/vue/24/outline";
-import { useParentPathName } from "@/Composable/fetch";
+import { useParentRouteName } from "@/Composable/fetch";
 
 // const location = useRoute();
 
 const navigation = ref([
   {
-    name: "Tasks",
-    href: "/tasks",
-    icon: HomeIcon,
-    current: true,
-  },
+        name: "Inventory",
+        href: "inventory:index",
+        icon: HomeIcon,
+        current: true,
+    },
+    {
+        name: "Items",
+        href: "#",
+        icon: Square3Stack3DIcon,
+        current: true,
+    },
 ]);
 </script>
 
@@ -57,9 +63,10 @@ const navigation = ref([
         v-for="item in navigation" :key="item.name"
        
         class="w-full flex items-center text-blue-400 h-10 pl-4 hover:bg-gray-200 rounded-lg cursor-pointer"
-       
+        :class="route().current(item.href) ||
+                            useParentRouteName(item.href) ===
+                                useParentRouteName(route().current()) ? 'bg-gray-200' : ''"
       > 
-      <!-- :class="useParentPathName(item.href) == useParentPathName(location.path) ? 'bg-gray-200' : ''" -->
       
         <component :is="item.icon" class="mr-2 flex-shrink-0 h-6 w-6" aria-hidden="true" />
         <span class="text-gray-700">{{ item.name }}</span>

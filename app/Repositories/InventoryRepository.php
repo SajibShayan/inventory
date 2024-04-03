@@ -14,8 +14,8 @@ class InventoryRepository extends BaseRepository implements InventoryRepositoryI
         parent::__construct($model);
     }
 
-    public function getAllInventory(?int $limit = 3): Collection|Paginator
+    public function getAllInventory(): Collection
     {
-        return $this->model->orderByDesc('id')->paginate($limit);
+        return $this->model->all();
     }
 }
