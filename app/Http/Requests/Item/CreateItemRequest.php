@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Inventory;
+namespace App\Http\Requests\Item;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateInventoryRequest extends FormRequest
+class CreateItemRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,11 @@ class CreateInventoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-
-            'name' => 'required|string|unique:inventories|max:255',
-            'description' => ['required', 'string'],
+            'name' => 'required|string|unique:items|max:255',
+            'inventory_id' => 'required|exists:inventories,id',
+            'description' => 'required|string',
+            'image' => 'required|image|image:jpeg,png,jpg,gif,svg|max:2048',
+            'quantity' => 'required|numeric',
         ];
     }
 }

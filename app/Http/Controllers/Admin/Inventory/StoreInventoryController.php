@@ -18,6 +18,7 @@ class StoreInventoryController extends Controller
         $user = Auth::user();
 
         $user->inventories()->create($payload);
+
         return back();
     }
 }

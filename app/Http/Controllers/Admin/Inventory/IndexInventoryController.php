@@ -14,7 +14,7 @@ class IndexInventoryController extends Controller
      */
     public function __invoke(Request $request, InventoryRepositoryInterface $inventoryRepository)
     {
-       
+
         return Inertia::render('Dashboard', [
             'categories' => $inventoryRepository->getAllInventory(),
         ]);

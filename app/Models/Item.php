@@ -36,4 +36,9 @@ class Item extends Model
     {
         return $this->belongsTo(Inventory::class);
     }
+
+    public function inventory(): BelongsTo
+    {
+        return $this->belongsTo(Inventory::class);
+    }
 }

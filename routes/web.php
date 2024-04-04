@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
 /*
@@ -25,7 +26,6 @@ Route::get('/', function () {
     ]);
 });
 
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -35,15 +35,28 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::group([], function () {
-    Route::prefix('inventory')->as('inventory:')
+    Route::prefix('inventories')->as('inventory:')
         ->group(
             base_path('routes/resources/inventory.php'),
         );
+    Route::prefix('items')->as('items:')
+        ->group(
+            base_path('routes/resources/item.php'),
+        );
 });
-
-
 
 Route::get('/dashboard', function () {
     // return Inertia::render('Dashboard');
     return redirect()->route('inventory:index');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+//define route for fetching image
+Route::get('/images/{path}', fn (string $path) => response(
+    Storage::get("public/images/$path"),
+    200,
+    [
+        'Content-Type' => Storage::mimeType("public/images/$path"),
+        'Cache-Control' => 'max-age=2630000, public',
+    ]
+));

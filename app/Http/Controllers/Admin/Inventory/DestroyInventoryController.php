@@ -12,13 +12,12 @@ class DestroyInventoryController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request, 
-    Inventory $inventory,
-    InventoryRepositoryInterface $inventoryRepository
-    )
-    {
+    public function __invoke(Request $request,
+        Inventory $inventory,
+        InventoryRepositoryInterface $inventoryRepository
+    ) {
         $inventoryRepository->delete($inventory->id);
+
         return back();
     }
-
 }

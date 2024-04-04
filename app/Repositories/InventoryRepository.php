@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Contract\Repositories\InventoryRepositoryInterface;
 use App\Models\Inventory;
-use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 
 class InventoryRepository extends BaseRepository implements InventoryRepositoryInterface

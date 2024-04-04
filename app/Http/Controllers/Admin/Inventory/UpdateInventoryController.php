@@ -14,11 +14,11 @@ class UpdateInventoryController extends Controller
      * Handle the incoming request.
      */
     public function __invoke(CreateInventoryRequest $request,
-     Inventory $inventory,
-     InventoryRepositoryInterface $inventoryRepository
-     )
-    {
+        Inventory $inventory,
+        InventoryRepositoryInterface $inventoryRepository
+    ) {
         $inventoryRepository->update($inventory->id, $request->validated());
+
         return back();
     }
 }
