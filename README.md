@@ -11,7 +11,8 @@ git clone
 composer install
 
 #install npm 
-npm install
+npm install 
+npm install --force
 
 #generate app key 
 php artisan key:generate
@@ -19,8 +20,8 @@ php artisan key:generate
 #run the command 
 ./vendor/bin/sail up -d
 
-#migrate and seed the data backend 
-./vendor/bin/sail artisan migrate:fresh --seed
+#migrate the database
+./vendor/bin/sail artisan migrate:fresh
 
 #for the root permission run this command in the terminal of docker laravel.test container 
 chown -R sail:sail storage

@@ -107,7 +107,7 @@ const getSelectedCategory = (selectedCategoryName) => {
         </Table>
         <div v-else-if="items?.total === 0"
             class="mt-20 flex w-full justify-center items-center text-gray-600 text-3xl">
-            No video found
+            No items found
         </div>
             </div>
         </template>
