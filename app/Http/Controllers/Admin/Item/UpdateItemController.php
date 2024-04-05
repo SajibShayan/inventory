@@ -4,19 +4,22 @@ namespace App\Http\Controllers\Admin\Item;
 
 use App\Contract\Repositories\ItemRepositoryInterface;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Item\CreateItemRequest;
+use App\Http\Requests\Item\UpdateItemRequest;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
-class StoreItemController extends Controller
+class UpdateItemController extends Controller
 {
     /**
      * Handle the incoming request.
      */
     public function __invoke(
-        CreateItemRequest $request,
+        UpdateItemRequest $request,
+        Item $item,
         ItemRepositoryInterface $itemRepository
     ) {
-        $itemRepository->create($request->validated());
+        $payload = $request->validated();
+        $itemRepository->update($item->id, $payload);
 
         return back();
     }

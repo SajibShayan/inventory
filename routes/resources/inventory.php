@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function () {
 
-    // task route
     Route::get('/', IndexInventoryController::class)->name('index');
     Route::post('/', StoreInventoryController::class)->name('store');
     Route::put('/{inventory}', UpdateInventoryController::class)->name('update');

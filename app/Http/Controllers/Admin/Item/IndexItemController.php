@@ -17,8 +17,7 @@ class IndexItemController extends Controller
         Request $request,
         InventoryRepositoryInterface $inventoryRepository,
         ItemRepositoryInterface $itemRepository
-    )
-    {
+    ) {
 
         return Inertia::render('Item/Index', [
             'categories' => $inventoryRepository->getAllInventory(),

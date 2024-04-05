@@ -16,6 +16,12 @@ class DestroyInventoryController extends Controller
         Inventory $inventory,
         InventoryRepositoryInterface $inventoryRepository
     ) {
+        $hasItems = $inventory->items()->exists();
+
+        if ($hasItems) {
+            return back()->withErrors(['inventory' => 'Inventory cannot be deleted because it has associated items.']);
+        }
+
         $inventoryRepository->delete($inventory->id);
 
         return back();

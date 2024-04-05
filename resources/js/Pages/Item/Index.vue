@@ -1,14 +1,12 @@
 <script setup>
-import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { useForm, router } from "@inertiajs/vue3";
-import TagCategoryRow from "@/Components/Admin/TagCategoryRow.vue";
-import { ref, defineProps } from "vue";
-import Modal from "@/Components/Modal.vue";
 import CustomModal from "@/Components/CustomModal.vue";
-import { errorNotification,successNotification } from '@/Composable/notification'
-import Table from "@/Components/Table.vue"; 
 import FilterDropdown from "@/Components/FilterDropdown.vue";
+import Table from "@/Components/Table.vue";
 import VideoRow from "@/Components/VideoRow.vue";
+import { errorNotification, successNotification } from '@/Composable/notification';
+import AdminLayout from "@/Layouts/AdminLayout.vue";
+import { router, useForm } from "@inertiajs/vue3";
+import { defineProps, ref } from "vue";
 
 const props = defineProps({
     items: {
@@ -28,8 +26,6 @@ const props = defineProps({
 
 
 const showCreateModal = ref(false);
-const showEditModal = ref(false);
-const showDeleteModal = ref(false);
 const form = useForm({
     name: "",
     description: "",
@@ -38,43 +34,9 @@ const form = useForm({
     inventory_id: null,
 });
 
-console.log(props.items, "items")
 
 const handleFileChange = (e) => {
     form.image = e.target.files[0];
-};
-
-const handleDelete = (data) => {
-    router.delete(route("inventory:destroy", data.slug), {
-        onSuccess: () => {
-            showDeleteModal.value = false;
-            form.reset();
-            successNotification("Tag Inventory Deleted Successfully");
-        },
-            onError: (errors) => {
-                errorNotification("Something went wrong!");
-            }
-    });
-};
-
-const handleEdit = (input, data) => {
-    props.errors.category = null;
-
-    router.put(
-        route("inventory:update", input.slug),
-        data,
-        {
-            onSuccess: () => {
-                showEditModal.value = false;
-                form.reset();
-                successNotification("Inventory Updated Successfully");
-            },
-            onError: (errors) => {
-                errorNotification("Something went wrong!");
-            }
-            
-        }
-    );
 };
 
 const handleCreate = () => {
@@ -88,7 +50,6 @@ const handleCreate = () => {
             successNotification('Successfully created the item');
         },
          onError: (errors) => {
-            console.log(errors, "the error")
                 errorNotification("Something went wrong!");
             }
     });
@@ -96,6 +57,7 @@ const handleCreate = () => {
 
 
 const allCategory = [...props.categories];
+
 const getSelectedCategory = (selectedCategoryName) => {
 
     const selectedCategory = allCategory.find(category => category.name === selectedCategoryName);
@@ -109,6 +71,7 @@ const getSelectedCategory = (selectedCategoryName) => {
 </script>
 
 <template>
+
     <AdminLayout>
         <template #main>
             <div class="flex justify-between mx-4 items-center py-5 px-3">
@@ -133,7 +96,11 @@ const getSelectedCategory = (selectedCategoryName) => {
             <template #tbody>
                 <tr v-for="video in items?.data" :key="video.id"
                     class="hover:bg-gray-100 transition-colors group border-t border-gray-200">
-                    <VideoRow :video="video" />
+                    <VideoRow
+                     :video="video"
+                     :categories="categories"
+                     :handleEdit="handleEdit" 
+                     />
                 </tr>
 
             </template>

@@ -50,7 +50,6 @@ Route::get('/dashboard', function () {
     return redirect()->route('inventory:index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-
 //define route for fetching image
 Route::get('/images/{path}', fn (string $path) => response(
     Storage::get("public/images/$path"),

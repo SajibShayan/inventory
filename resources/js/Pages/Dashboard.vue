@@ -1,11 +1,10 @@
 <script setup>
-import AdminLayout from "@/Layouts/AdminLayout.vue";
-import { useForm, router } from "@inertiajs/vue3";
 import TagCategoryRow from "@/Components/Admin/TagCategoryRow.vue";
-import { ref, defineProps } from "vue";
-import Modal from "@/Components/Modal.vue";
 import CustomModal from "@/Components/CustomModal.vue";
-import { errorNotification,successNotification } from '@/Composable/notification'
+import { errorNotification, successNotification } from '@/Composable/notification';
+import AdminLayout from "@/Layouts/AdminLayout.vue";
+import { router, useForm } from "@inertiajs/vue3";
+import { defineProps, ref } from "vue";
 
 const props = defineProps({
     categories: {
@@ -17,7 +16,6 @@ const props = defineProps({
         default: () => { },
     },
 });
-
 
 const showCreateModal = ref(false);
 const showEditModal = ref(false);
@@ -33,10 +31,10 @@ const handleDelete = (data) => {
         onSuccess: () => {
             showDeleteModal.value = false;
             form.reset();
-            successNotification("Tag Inventory Deleted Successfully");
+            successNotification("Inventory Deleted Successfully");
         },
             onError: (errors) => {
-                errorNotification("Something went wrong!");
+                errorNotification( "Something went wrong!");
             }
     });
 };
@@ -53,7 +51,7 @@ const handleEdit = (input, data) => {
                 form.reset();
                 successNotification("Inventory Updated Successfully");
             },
-            onError: (errors) => {
+            onError: (error) => {
                 errorNotification("Something went wrong!");
             }
             
