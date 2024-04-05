@@ -1,3 +1,7 @@
+# inventory
+
+
+```bash
 # clone
 git clone
 
@@ -28,3 +32,5 @@ npm run dev
 
 #run this if faced permission issues for log file 
 chmod -R 775 storage
+
+```
